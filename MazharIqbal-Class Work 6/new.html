@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- CSS only -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>User Information</h1>
+  <div class="container ">
+    
+    <div class="tbl-header">
+      <table >
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Street</th>
+            <th>ZipCode</th>
+            
+          </tr>
+      </table>
+    </div>
+    <div class="row"></div>
+  </div>
+  <script>
+    fetch("https://jsonplaceholder.typicode.com/users").then(response => response.json()).then(users => {
+      if (users?.length) {
+        users?.forEach(user => {
+          console.log(users);
+          document.querySelector('.row').innerHTML += `
+          <section>
+            
+          <div>
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>${user.address.city}</td>
+            <td>${user.address.street}</td>
+            <td>${user.address.zipcode}</td>
+    
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
+  </section>
+
+            `;
+        })
+      } else {
+        document.querySelector('.row').innerHTML = "<div class='alert alert-success'>Your API limit exceeded</div>"
+      }
+
+    })
+  </script>
+
+</body>
+
+</html>
